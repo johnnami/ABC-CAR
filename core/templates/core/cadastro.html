@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{ texto_title }}
+{% endblock %}
+
+{% block subtitulo %}
+    {{ texto_titulo }}
+{% endblock %}
+
+{% block extrahead %}
+    {{ form.media }}
+{% endblock %}
+
+{% block main %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
+
+    <button type="submit" class="btn btn-primary">{{ texto_botao }}</button> &nbsp;
+    <button type="button" class="btn btn-danger" onclick="location.href='{% url url_voltar %}'" >Cancelar</button>
+
+    </form>
+
+
+{% endblock %}

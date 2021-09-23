@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    ListMens
+{% endblock %}
+
+{% block subtitulo %}
+    Listagem de Clientes Mensalistas
+{% endblock %}
+
+
+{% block main %}
+     <ul class="list-group">
+
+        {% for mensa in dados %}
+
+            <li class="list-group-item">
+            Veículo: {{ mensa.id_veiculo.modelo }} - {{ mensa.id_veiculo.cor }}<br>
+            Placa: {{ mensa.id_veiculo.placa }}<br>
+            Mensalidade: {{ mensa.id_parametro.valor }}<br>
+            Obs.: <br>
+            {{ mensa.observacoes }}<br>
+        <a class="btn btn-primary" href="{% url 'url_atualiza_mensalista' mensa.id %}">Atualizar</a>  &nbsp
+             <a class="btn btn-danger" href="{% url 'url_exclui_mensalista' mensa.id %}">Excluir</a> <br>
+        </li>
+        {% endfor %}
+
+     </ul>
+{% endblock %}
+

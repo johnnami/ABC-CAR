@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block extrahead %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- informações do header - titulo e usuario -->
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-8"> <h3 class="principal">ABCcar : Estacionamento</h3> </div>
+            <div class="col-sm-12 col-md-6 col-lg-4  text-right">
+                    {% if user.get_username  %}
+                        (usuário: {{ user.get_username }} | <a href="/admin/">admin</a> | <a href="{% url 'logout' %}">logout</a>  )
+                    {% else %}
+                        ( <a href="{% url 'login' %}">login</a> |  <a href="{% url 'url_registrar' %}">registrar</a>)
+                    {% endif %}
+            </div>
+        </div>
+
+        <style>
+        .principal{
+            font-size: 50px;
+            color: #343a40;
+            font-family: 'Lobster', cursive;
+        }
+        body{
+            background-color: #d0d1d2;
+        }
+        .search-wrapper{
+            margin-left: auto;
+        }
+        </style>
+
+    <!-- Menu do sistema -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <!-- Brand -->
+      <a class="navbar-brand" href="{% url 'url_principal' %}">Home</a>
+
+      <!-- Links -->
+      <ul class="navbar-nav">
+
+
+        <!-- Dropdown Cliente -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Clientes
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'url_cadastro_cliente' %}">Cadastro</a>
+            <a class="dropdown-item" href="{% url 'url_listagem_clientes' %}">Listagem</a>
+           </div>
+        </li>
+
+        <!-- Dropdown Veiculo -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Veículos
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'url_cadastro_veiculo' %}">Cadastro</a>
+            <a class="dropdown-item" href="{% url 'url_listagem_veiculos' %}">Listagem</a>
+           </div>
+        </li>
+
+         <!-- Dropdown Mensalista -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Mensalista
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'url_cadastro_mensalista' %}">Cadastro</a>
+            <a class="dropdown-item" href="{% url 'url_listagem_mensalistas' %}">Listagem</a>
+           </div>
+        </li>
+
+        <!-- Dropdown Rotativo -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Rotativo
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'url_cadastro_rotativo' %}">Cadastro</a>
+            <a class="dropdown-item" href="{% url 'url_listagem_rotativos' %}">Listagem</a>
+           </div>
+        </li>
+
+         <!-- Dropdown Parametros -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Tabela
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'url_cadastro_parametro' %}">Cadastro</a>
+            <a class="dropdown-item" href="{% url 'url_listagem_parametros' %}">Listagem</a>
+           </div>
+        </li>
+      </ul>
+
+   {% block pesquisa %}
+   {% endblock %}
+
+    </nav>
+
+
+        <!-- insere os templates -->
+        {% block main %}
+        {% endblock %}
+    </div>
+</body>
+</html>

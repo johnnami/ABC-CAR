@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    CadVei
+{% endblock %}
+{% block pagina %}
+    ABCcar : Cadastro Veículo
+{% endblock %}
+{% block main %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+     <button type="submit">{{ texto_botao }}</button> &nbsp;
+    <button type="button" onclick="location.href='{% url url_voltar %}'">Cancelar</button>
+    </form>
+{% endblock %}

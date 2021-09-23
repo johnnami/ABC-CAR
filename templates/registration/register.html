@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    ABCcar:Cadastro
+{% endblock %}
+
+{% block main %}
+    <h3>Cadastro de Usuário</h3>
+    <form action="" method="post">
+     {% csrf_token %}
+        <div>
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </div>
+    </form>
+{% endblock %}

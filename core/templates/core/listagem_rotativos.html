@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ListRot
+{% endblock %}
+
+{% block subtitulo %}
+    Listagem de Rotativos
+{% endblock %}
+
+
+{% block main %}
+    <!-- Componente para mostrar mensagens do CRUD -->
+    {% if messages %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% for mensagem in messages %}
+                {{ mensagem }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <ul class="list-group">
+    {% for rot in dados %}
+        <li class="list-group-item">
+        Entrada: {{ rot.data_entrada }}<br>
+        Saída: {{ rot.data_saida }} &nbsp; &nbsp; |
+        <a class="btn btn-primary" href="{% url 'url_atualiza_rotativo' rot.id %}">Atualizar</a><br>
+        Valor: {{ rot.id_parametro.valor }}<br>
+        Total: {{ rot.total }} <br>
+        Veículo: {{ rot.id_veiculo.placa }}<br>
+        Pago: {{ rot.pago }}<br>
+        Obs.: <br>
+        {{ rot.observacoes }}<br>
+        <a class="btn btn-danger" href="{% url 'url_exclui_rotativo' rot.id %}">Excluir</a> <br>
+        </li>
+
+    {% endfor %}
+    </ul>
+
+{% endblock %}

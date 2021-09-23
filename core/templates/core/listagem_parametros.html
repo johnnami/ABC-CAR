@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ListPre
+{% endblock %}
+
+{% block subtitulo %}
+    Tabela Preços
+{% endblock %}
+
+
+{% block main %}
+    <!-- Componente para mostrar mensagens do CRUD -->
+    {% if messages %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% for mensagem in messages %}
+                {{ mensagem }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <ul class="list-group">
+    {% for para in dados %}
+        <li class="list-group-item">
+        Valor: {{ para.valor }}<br>
+        Descrição: {{ para.descricao }} <br>
+        <a class="btn btn-primary" href="{% url 'url_atualiza_parametro' para.id %}">Atualizar</a>  &nbsp
+            <a class="btn btn-danger" href="{% url 'url_exclui_parametro' para.id %}">Excluir</a> <br>
+
+        </li>
+
+    {% endfor %}
+    </ul>
+
+{% endblock %}

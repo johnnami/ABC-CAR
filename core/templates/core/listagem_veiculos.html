@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+    listVei
+{% endblock %}
+
+{% block subtitulo %}
+    ABCcar : Listagem Veiculos
+{% endblock %}
+
+{% block pesquisa %}
+<!-- Componente para fazer pesquisa -->
+       <form class="form-inline ml-auto" method="post">
+           {% csrf_token %}
+         <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar" name="veiculo_input">
+        <button class="btn btn-success" type="submit">Search</button>
+        </form>
+{% endblock %}
+
+{% block main %}
+     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+</nav>
+    {% if messages %}
+        <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for mensagem in messages %}
+            {{ mensagem }}
+        {% endfor %}
+        </div>
+    {% endif %}
+    <ul class="list-group">
+         {% for car in dados %}
+             <li class="list-group-item">
+             Fabricante: {{ car.fabricante }} <br>
+             Modelo: {{ car.modelo }} <br>
+             Ano: {{ car.ano }} <br>
+             Cor: {{ car.cor }} <br>
+             Placa: {{ car.placa }} <br>
+             Cliente: {{ car.id_cliente }} <br>
+             Observações: {{ car.observacoes}} <br>
+
+             {% if car.foto %}
+                 <img src="{{ car.foto.url }}" width="150"> <br>
+             {% else %}
+                 <img src="{% static 'img/veiculo-generico.png' %}"  width="150" alt="">
+             {% endif %}
+             <br>
+
+             <a class="btn btn-primary" href="{% url 'url_atualiza_veiculo' car.id %}">Atualizar</a>  &nbsp
+             <a class="btn btn-danger" href="{% url 'url_exclui_veiculo' car.id %}">Excluir</a> <br>
+             </li>
+         {% endfor %}
+    </ul>
+{% endblock %}
